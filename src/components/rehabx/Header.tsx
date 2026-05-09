@@ -342,7 +342,7 @@ export function Header() {
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
               onClick={goToDemo}
-              className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-purple-600 to-blue-500 text-white rounded-full text-sm font-bold transition-all duration-200 group"
+              className="cta-primary cta-demo-contour flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-purple-600 to-blue-500 text-white rounded-full text-sm font-bold transition-all duration-200 group"
             >
               <span>{t.nav.requestDemo}</span>
               <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
@@ -443,7 +443,7 @@ export function Header() {
                 </button>
                 <button
                   onClick={goToDemo}
-                  className="w-full py-3 bg-gradient-to-r from-purple-600 to-blue-500 text-white rounded-full font-bold"
+                  className="cta-primary cta-demo-contour w-full py-3 bg-gradient-to-r from-purple-600 to-blue-500 text-white rounded-full font-bold"
                 >
                   {t.nav.requestDemo}
                 </button>

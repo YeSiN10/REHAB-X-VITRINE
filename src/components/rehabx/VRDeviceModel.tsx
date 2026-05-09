@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
 
@@ -11,11 +11,13 @@ const METALLIC_PATH = `/models/vr-device/vr-device-metallic.png?v=${ASSET_VERSIO
 
 export function VRDeviceModel() {
   const hostRef = useRef<HTMLDivElement>(null);
+  const [isModelReady, setIsModelReady] = useState(false);
 
   useEffect(() => {
     const host = hostRef.current;
     if (!host) return;
 
+    let isMounted = true;
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
     camera.position.set(0, 0.15, 6.8);
@@ -52,9 +54,9 @@ export function VRDeviceModel() {
     const textureLoader = new THREE.TextureLoader();
     const colorMap = textureLoader.load(TEXTURE_PATH);
     colorMap.colorSpace = THREE.SRGBColorSpace;
-    const normalMap = textureLoader.load(NORMAL_PATH);
-    const roughnessMap = textureLoader.load(ROUGHNESS_PATH);
-    const metalnessMap = textureLoader.load(METALLIC_PATH);
+    let normalMap: THREE.Texture | null = null;
+    let roughnessMap: THREE.Texture | null = null;
+    let metalnessMap: THREE.Texture | null = null;
 
     const targetRotation = { x: group.rotation.x, y: group.rotation.y };
     const pointer = { x: 0, y: 0 };
@@ -70,9 +72,6 @@ export function VRDeviceModel() {
         child.receiveShadow = true;
         child.material = new THREE.MeshStandardMaterial({
           map: colorMap,
-          normalMap,
-          roughnessMap,
-          metalnessMap,
           metalness: 0.45,
           roughness: 0.58,
         });
@@ -88,6 +87,21 @@ export function VRDeviceModel() {
       object.rotation.set(0.02, Math.PI * 0.08, -0.02);
       group.add(object);
       model = object;
+      if (isMounted) setIsModelReady(true);
+
+      normalMap = textureLoader.load(NORMAL_PATH);
+      roughnessMap = textureLoader.load(ROUGHNESS_PATH);
+      metalnessMap = textureLoader.load(METALLIC_PATH);
+      object.traverse((child) => {
+        if (!(child instanceof THREE.Mesh)) return;
+        const material = child.material;
+        if (!(material instanceof THREE.MeshStandardMaterial)) return;
+
+        material.normalMap = normalMap;
+        material.roughnessMap = roughnessMap;
+        material.metalnessMap = metalnessMap;
+        material.needsUpdate = true;
+      });
     });
 
     const resize = () => {
@@ -132,15 +146,16 @@ export function VRDeviceModel() {
     animate();
 
     return () => {
+      isMounted = false;
       window.cancelAnimationFrame(frameId);
       resizeObserver.disconnect();
       host.removeEventListener('pointermove', onPointerMove);
       host.removeEventListener('pointerleave', onPointerLeave);
       renderer.dispose();
       colorMap.dispose();
-      normalMap.dispose();
-      roughnessMap.dispose();
-      metalnessMap.dispose();
+      normalMap?.dispose();
+      roughnessMap?.dispose();
+      metalnessMap?.dispose();
       scene.traverse((child) => {
         if (child instanceof THREE.Mesh) {
           child.geometry.dispose();
@@ -156,10 +171,23 @@ export function VRDeviceModel() {
   }, []);
 
   return (
-    <div
-      ref={hostRef}
-      aria-label="Interactive VR headset model"
-      className="relative h-[520px] w-full cursor-grab active:cursor-grabbing"
-    />
+    <div className="relative h-[520px] w-full cursor-grab active:cursor-grabbing">
+      <div
+        aria-hidden="true"
+        className={`pointer-events-none absolute inset-0 flex items-center justify-center transition-opacity duration-500 ${
+          isModelReady ? 'opacity-0' : 'opacity-100'
+        }`}
+      >
+        <div className="relative h-48 w-80 animate-pulse rounded-[4rem] bg-gradient-to-br from-white via-purple-100 to-blue-100 shadow-2xl shadow-purple-200/60 ring-1 ring-purple-200/70">
+          <div className="absolute left-1/2 top-[-3.25rem] h-24 w-24 -translate-x-1/2 rounded-t-[3rem] border-[18px] border-b-0 border-gray-200/90" />
+          <div className="absolute inset-x-8 bottom-6 h-8 rounded-full bg-purple-300/25 blur-xl" />
+        </div>
+      </div>
+      <div
+        ref={hostRef}
+        aria-label="Interactive VR headset model"
+        className={`relative h-full w-full transition-opacity duration-500 ${isModelReady ? 'opacity-100' : 'opacity-0'}`}
+      />
+    </div>
   );
 }
