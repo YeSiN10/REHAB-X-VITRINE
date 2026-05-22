@@ -233,7 +233,7 @@ export function TestimonialsPage() {
                 const Icon = [Users, StarIcon, CheckCircle2, Zap][i] || Users;
                 return (
                   <div key={i} className="text-left p-6 bg-white rounded-2xl border border-gray-100 shadow-sm">
-                    <div className="w-11 h-11 bg-purple-50 border-2 border-purple-200 rounded-xl flex items-center justify-center mb-4">
+                    <div className="w-11 h-11 bg-violet-50 rounded-2xl flex items-center justify-center mb-4">
                       <Icon className="text-purple-600" size={20} strokeWidth={2} />
                     </div>
                     <div className="text-3xl font-black bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent mb-1">

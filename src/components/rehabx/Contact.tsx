@@ -183,8 +183,8 @@ export function Contact() {
                   whileHover={{ x: 6 }}
                   className="flex items-start gap-4 p-5 rounded-2xl hover:bg-purple-50 transition-colors group cursor-pointer"
                 >
-                  <div className="w-12 h-12 bg-purple-50 border-2 border-purple-200 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                    <item.icon className="text-purple-600" size={20} strokeWidth={2} />
+                  <div className="w-12 h-12 bg-violet-50 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                    <item.icon className="text-violet-600" size={20} strokeWidth={2} />
                   </div>
                   <div>
                     <div className="font-bold text-gray-800">{item.label}</div>

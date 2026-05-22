@@ -163,8 +163,8 @@ export function About() {
                   whileHover={{ y: -4, transition: { duration: 0.2 } }}
                   className="group bg-white border-2 border-gray-100 rounded-2xl p-5 hover:border-purple-200 hover:shadow-lg transition-all duration-300 cursor-pointer"
                 >
-                  <div className="w-12 h-12 rounded-xl border-2 border-purple-300 bg-purple-50/50 flex items-center justify-center mb-3 group-hover:border-purple-500 group-hover:bg-purple-100/50 transition-all">
-                    <Icon className="text-purple-600 group-hover:text-purple-700" size={24} strokeWidth={1.5} />
+                  <div className="w-12 h-12 rounded-2xl bg-violet-50 flex items-center justify-center mb-3">
+                    <Icon className="text-violet-600" size={24} strokeWidth={1.5} />
                   </div>
                   <div className="font-bold text-gray-900 text-sm leading-tight mb-1">{card.title}</div>
                   <div className="text-xs text-gray-500">{card.sub}</div>

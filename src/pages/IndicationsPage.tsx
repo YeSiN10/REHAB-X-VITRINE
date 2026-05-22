@@ -280,8 +280,8 @@ export function IndicationsPage() {
                   className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-sm rounded-2xl px-5 py-4 shadow-xl border border-white/60"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-blue-500 rounded-xl flex items-center justify-center">
-                      <Activity size={18} className="text-white" />
+                    <div className="w-10 h-10 bg-violet-50 rounded-2xl flex items-center justify-center">
+                      <Activity size={18} className="text-violet-600" />
                     </div>
                     <div>
                       <div className="text-xl font-black text-gray-900">8+</div>

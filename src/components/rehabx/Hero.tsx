@@ -112,8 +112,8 @@ function ActivityCard() {
       className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl shadow-purple-100/40 p-4 border border-gray-100"
     >
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-blue-500 rounded-xl flex items-center justify-center">
-          <Activity className="text-white" size={18} />
+        <div className="w-10 h-10 bg-violet-50 rounded-2xl flex items-center justify-center">
+          <Activity className="text-violet-600" size={18} />
         </div>
         <div>
           <div className="text-sm font-bold text-gray-800">{t.hero.recoveryScore}</div>

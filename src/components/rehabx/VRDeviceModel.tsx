@@ -3,11 +3,21 @@ import * as THREE from 'three';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
 
 const ASSET_VERSION = '2026-05-09-aurora-rift';
-const MODEL_PATH = `/models/vr-device/vr-device.fbx?v=${ASSET_VERSION}`;
-const TEXTURE_PATH = `/models/vr-device/vr-device-texture.png?v=${ASSET_VERSION}`;
-const NORMAL_PATH = `/models/vr-device/vr-device-normal.png?v=${ASSET_VERSION}`;
+const MODEL_PATH    = `/models/vr-device/vr-device.fbx?v=${ASSET_VERSION}`;
+const TEXTURE_PATH  = `/models/vr-device/vr-device-texture.png?v=${ASSET_VERSION}`;
+const NORMAL_PATH   = `/models/vr-device/vr-device-normal.png?v=${ASSET_VERSION}`;
 const ROUGHNESS_PATH = `/models/vr-device/vr-device-roughness.png?v=${ASSET_VERSION}`;
 const METALLIC_PATH = `/models/vr-device/vr-device-metallic.png?v=${ASSET_VERSION}`;
+
+/** Wrap THREE.TextureLoader in a Promise */
+function loadTexture(loader: THREE.TextureLoader, url: string): Promise<THREE.Texture> {
+  return new Promise((resolve, reject) => loader.load(url, resolve, undefined, reject));
+}
+
+/** Detect low-end device: skip heavy PBR maps to reduce GPU + bandwidth */
+const isLowEnd =
+  navigator.hardwareConcurrency <= 4 ||
+  (window.devicePixelRatio <= 1 && navigator.hardwareConcurrency <= 6);
 
 export function VRDeviceModel() {
   const hostRef = useRef<HTMLDivElement>(null);
@@ -18,12 +28,15 @@ export function VRDeviceModel() {
     if (!host) return;
 
     let isMounted = true;
+
+    /* ─── Scene ─────────────────────────────────────────────── */
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
     camera.position.set(0, 0.15, 6.8);
 
+    /* Start at pixelRatio 1 to reduce initial GPU pressure */
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(1);
     renderer.setClearColor(0x000000, 0);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.shadowMap.enabled = true;
@@ -35,8 +48,8 @@ export function VRDeviceModel() {
     group.rotation.set(-0.05, -0.35, 0.03);
     scene.add(group);
 
-    const ambient = new THREE.AmbientLight(0xffffff, 1.9);
-    scene.add(ambient);
+    /* ─── Lights ─────────────────────────────────────────────── */
+    scene.add(new THREE.AmbientLight(0xffffff, 1.9));
 
     const key = new THREE.DirectionalLight(0xffffff, 3.2);
     key.position.set(3.5, 4, 5);
@@ -51,66 +64,11 @@ export function VRDeviceModel() {
     fill.position.set(-2, -1, 3);
     scene.add(fill);
 
-    const textureLoader = new THREE.TextureLoader();
-    const colorMap = textureLoader.load(TEXTURE_PATH);
-    colorMap.colorSpace = THREE.SRGBColorSpace;
-    let normalMap: THREE.Texture | null = null;
-    let roughnessMap: THREE.Texture | null = null;
-    let metalnessMap: THREE.Texture | null = null;
-
+    /* ─── Interaction ────────────────────────────────────────── */
     const targetRotation = { x: group.rotation.x, y: group.rotation.y };
     const pointer = { x: 0, y: 0 };
     let model: THREE.Object3D | null = null;
     let frameId = 0;
-
-    const loader = new FBXLoader();
-    loader.load(MODEL_PATH, (object) => {
-      object.traverse((child) => {
-        if (!(child instanceof THREE.Mesh)) return;
-
-        child.castShadow = true;
-        child.receiveShadow = true;
-        child.material = new THREE.MeshStandardMaterial({
-          map: colorMap,
-          metalness: 0.45,
-          roughness: 0.58,
-        });
-      });
-
-      const bounds = new THREE.Box3().setFromObject(object);
-      const center = bounds.getCenter(new THREE.Vector3());
-      const size = bounds.getSize(new THREE.Vector3());
-      const largestSide = Math.max(size.x, size.y, size.z) || 1;
-
-      object.position.sub(center);
-      object.scale.setScalar(2.45 / largestSide);
-      object.rotation.set(0.02, Math.PI * 0.08, -0.02);
-      group.add(object);
-      model = object;
-      if (isMounted) setIsModelReady(true);
-
-      normalMap = textureLoader.load(NORMAL_PATH);
-      roughnessMap = textureLoader.load(ROUGHNESS_PATH);
-      metalnessMap = textureLoader.load(METALLIC_PATH);
-      object.traverse((child) => {
-        if (!(child instanceof THREE.Mesh)) return;
-        const material = child.material;
-        if (!(material instanceof THREE.MeshStandardMaterial)) return;
-
-        material.normalMap = normalMap;
-        material.roughnessMap = roughnessMap;
-        material.metalnessMap = metalnessMap;
-        material.needsUpdate = true;
-      });
-    });
-
-    const resize = () => {
-      const width = Math.max(host.clientWidth, 1);
-      const height = Math.max(host.clientHeight, 1);
-      renderer.setSize(width, height, false);
-      camera.aspect = width / height;
-      camera.updateProjectionMatrix();
-    };
 
     const onPointerMove = (event: PointerEvent) => {
       const rect = host.getBoundingClientRect();
@@ -119,32 +77,96 @@ export function VRDeviceModel() {
       targetRotation.y = -0.35 + pointer.x * 0.55;
       targetRotation.x = -0.05 - pointer.y * 0.28;
     };
-
     const onPointerLeave = () => {
       targetRotation.x = -0.05;
       targetRotation.y = -0.35;
     };
 
+    /* ─── Resize ─────────────────────────────────────────────── */
+    const resize = () => {
+      const width  = Math.max(host.clientWidth,  1);
+      const height = Math.max(host.clientHeight, 1);
+      renderer.setSize(width, height, false);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+    };
     const resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(host);
     host.addEventListener('pointermove', onPointerMove);
     host.addEventListener('pointerleave', onPointerLeave);
     resize();
 
+    /* ─── Animation loop (starts immediately so resize works) ── */
     const animate = () => {
       frameId = window.requestAnimationFrame(animate);
       group.rotation.x += (targetRotation.x - group.rotation.x) * 0.075;
       group.rotation.y += (targetRotation.y - group.rotation.y) * 0.075;
-      group.rotation.z = 0.025 * Math.sin(Date.now() * 0.001);
-
-      if (model) {
-        model.position.y = 0.08 * Math.sin(Date.now() * 0.0014);
-      }
-
+      group.rotation.z  = 0.025 * Math.sin(Date.now() * 0.001);
+      if (model) model.position.y = 0.08 * Math.sin(Date.now() * 0.0014);
       renderer.render(scene, camera);
     };
     animate();
 
+    /* ─── Asset loading ──────────────────────────────────────── */
+    const texLoader = new THREE.TextureLoader();
+
+    // Kick off ALL texture loads immediately and in parallel
+    // (the browser may already have them if <link rel="preload"> fired first)
+    const colorPromise = loadTexture(texLoader, TEXTURE_PATH).then((t) => {
+      t.colorSpace = THREE.SRGBColorSpace;
+      return t;
+    });
+
+    const pbrPromises = isLowEnd
+      ? Promise.resolve({ normal: null, roughness: null, metalness: null })
+      : Promise.all([
+          loadTexture(texLoader, NORMAL_PATH),
+          loadTexture(texLoader, ROUGHNESS_PATH),
+          loadTexture(texLoader, METALLIC_PATH),
+        ]).then(([normal, roughness, metalness]) => ({ normal, roughness, metalness }));
+
+    // Load color texture and FBX simultaneously
+    Promise.all([colorPromise, pbrPromises]).then(([colorMap, pbr]) => {
+      if (!isMounted) return;
+
+      const fbxLoader = new FBXLoader();
+      fbxLoader.load(MODEL_PATH, (object) => {
+        if (!isMounted) return;
+
+        object.traverse((child) => {
+          if (!(child instanceof THREE.Mesh)) return;
+          child.castShadow    = true;
+          child.receiveShadow = true;
+          child.material = new THREE.MeshStandardMaterial({
+            map:          colorMap,
+            metalness:    0.45,
+            roughness:    0.58,
+            normalMap:    pbr.normal    ?? undefined,
+            roughnessMap: pbr.roughness ?? undefined,
+            metalnessMap: pbr.metalness ?? undefined,
+          });
+        });
+
+        const bounds = new THREE.Box3().setFromObject(object);
+        const center = bounds.getCenter(new THREE.Vector3());
+        const size   = bounds.getSize(new THREE.Vector3());
+        const largestSide = Math.max(size.x, size.y, size.z) || 1;
+
+        object.position.sub(center);
+        object.scale.setScalar(2.45 / largestSide);
+        object.rotation.set(0.02, Math.PI * 0.08, -0.02);
+        group.add(object);
+        model = object;
+
+        // Upgrade pixel ratio now that the heavy lifting is done
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        resize();
+
+        setIsModelReady(true);
+      });
+    });
+
+    /* ─── Cleanup ────────────────────────────────────────────── */
     return () => {
       isMounted = false;
       window.cancelAnimationFrame(frameId);
@@ -152,15 +174,11 @@ export function VRDeviceModel() {
       host.removeEventListener('pointermove', onPointerMove);
       host.removeEventListener('pointerleave', onPointerLeave);
       renderer.dispose();
-      colorMap.dispose();
-      normalMap?.dispose();
-      roughnessMap?.dispose();
-      metalnessMap?.dispose();
       scene.traverse((child) => {
         if (child instanceof THREE.Mesh) {
           child.geometry.dispose();
           if (Array.isArray(child.material)) {
-            child.material.forEach((material) => material.dispose());
+            child.material.forEach((m) => m.dispose());
           } else {
             child.material.dispose();
           }
@@ -172,9 +190,10 @@ export function VRDeviceModel() {
 
   return (
     <div className="relative h-[520px] w-full cursor-grab active:cursor-grabbing">
+      {/* Skeleton placeholder — visible until model is ready */}
       <div
         aria-hidden="true"
-        className={`pointer-events-none absolute inset-0 flex items-center justify-center transition-opacity duration-500 ${
+        className={`pointer-events-none absolute inset-0 flex items-center justify-center transition-opacity duration-700 ${
           isModelReady ? 'opacity-0' : 'opacity-100'
         }`}
       >
@@ -183,10 +202,12 @@ export function VRDeviceModel() {
           <div className="absolute inset-x-8 bottom-6 h-8 rounded-full bg-purple-300/25 blur-xl" />
         </div>
       </div>
+
+      {/* Three.js canvas host */}
       <div
         ref={hostRef}
         aria-label="Interactive VR headset model"
-        className={`relative h-full w-full transition-opacity duration-500 ${isModelReady ? 'opacity-100' : 'opacity-0'}`}
+        className={`relative h-full w-full transition-opacity duration-700 ${isModelReady ? 'opacity-100' : 'opacity-0'}`}
       />
     </div>
   );

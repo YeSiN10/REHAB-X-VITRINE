@@ -510,7 +510,7 @@ export function SolutionPage() {
                       transition={{ delay: i * 0.1, duration: 0.45 }}
                       className="flex items-start gap-4"
                     >
-                      <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center shrink-0">
+                      <div className="w-12 h-12 bg-violet-50 rounded-2xl flex items-center justify-center shrink-0">
                         <Icon size={22} className="text-gray-600" />
                       </div>
                       <div>

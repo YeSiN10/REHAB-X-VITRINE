@@ -143,8 +143,8 @@ export function DemoRequestPage() {
                     transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
                     className="flex items-start gap-4"
                   >
-                    <div className="w-10 h-10 bg-gradient-to-br from-purple-100 to-blue-100 rounded-xl flex items-center justify-center shrink-0">
-                      <benefit.icon className="text-purple-600" size={18} />
+                    <div className="w-10 h-10 bg-violet-50 rounded-2xl flex items-center justify-center shrink-0">
+                      <benefit.icon className="text-violet-600" size={18} />
                     </div>
                     <div>
                       <h3 className="font-bold text-gray-900 mb-0.5">{copy.title}</h3>
@@ -429,7 +429,7 @@ export function DemoRequestPage() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 className="relative text-center"
               >
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-100 to-blue-100 rounded-2xl mb-6">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-violet-50 rounded-2xl mb-6">
                   <span className="text-2xl font-black bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent">
                     {item.step}
                   </span>

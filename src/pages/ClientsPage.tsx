@@ -20,8 +20,8 @@ const globalLocations = [
 ];
 
 const mapPulsePoints = [
-  { x: 49.5, y: 31, delay: 0.2 },   // Paris
-  { x: 51.2, y: 39, delay: 0.6 },   // Sousse
+  { x: 49.0, y: 24.5, delay: 0.2 },   // Paris
+  { x: 50.5, y: 33.0, delay: 0.6 },   // Sousse
 ];
 
 const stats = [
@@ -96,7 +96,7 @@ export function ClientsPage() {
                 whileHover={{ y: -4, transition: { duration: 0.2 } }}
                 className="text-center p-6 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-purple-200 transition-all"
               >
-                <div className="w-12 h-12 bg-purple-50 border-2 border-purple-200 rounded-xl flex items-center justify-center mx-auto mb-3">
+                <div className="w-12 h-12 bg-violet-50 rounded-2xl flex items-center justify-center mx-auto mb-3">
                   <stat.icon className="text-purple-600" size={22} strokeWidth={2} />
                 </div>
                 <div className="text-3xl font-black bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent mb-1">

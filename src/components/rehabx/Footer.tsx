@@ -40,11 +40,11 @@ export function Footer() {
       { label: t.footer.companyLinks.investors, action: 'external', target: '#' },
     ],
     [t.footer.help]: [
-      { label: t.footer.helpLinks.documentation, action: 'external', target: '#' },
-      { label: t.footer.helpLinks.helpCenter, action: 'external', target: '#' },
-      { label: t.footer.helpLinks.status, action: 'external', target: '#' },
-      { label: t.footer.helpLinks.contact, action: 'external', target: '#' },
-      { label: t.footer.helpLinks.privacy, action: 'external', target: '#' },
+      { label: t.footer.helpLinks.documentation, action: 'navigate', target: '/docs' },
+      { label: t.footer.helpLinks.helpCenter,    action: 'navigate', target: '/help' },
+      { label: t.footer.helpLinks.status,        action: 'navigate', target: '/status' },
+      { label: t.footer.helpLinks.contact,       action: 'scroll',   target: 'contact' },
+      { label: t.footer.helpLinks.privacy,       action: 'navigate', target: '/privacy' },
     ],
   };
 

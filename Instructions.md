@@ -1,0 +1,1 @@
+in the right of about page add image of Rehab X Logo , for inherited games stuido it's founded in 2024 not 2019 , so studio founded 2024 , rehab x born 2025 , first clinics 2025 , international scale 2025 , ai engine launch 2026 , Mobile App Release 2026

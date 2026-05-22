@@ -87,8 +87,8 @@ export const en = {
   // ─── About ─────────────────────────────────────────────────
   about: {
     badge: '💡 About RehabX',
-    titleLine1: 'A diverse, unique range of',
-    titleHighlight: ' therapeutic indications',
+    titleLine1: 'Therapeutic',
+    titleHighlight: ' Indications',
     p1: 'RehabX covers the major rehabilitation domains with engaging, measurable, evidence-based therapy for clinics and patients.',
     p2: 'With over 10 years of clinical research partnerships and a team of 200+ engineers, clinicians, and designers, we\'ve redefined what modern rehabilitation looks like.',
     benefits: [
@@ -125,9 +125,9 @@ export const en = {
 
   // ─── Blog ──────────────────────────────────────────────────
   blog: {
-    badge: '📚 Latest Research & Blog',
-    titleLine1: 'Clinical insights &',
-    titleLine2: 'research updates',
+    badge: 'Research & Blog',
+    titleLine1: 'Clinical',
+    titleLine2: 'Insights',
     viewAll: 'View all articles',
     readMore: 'Read more',
     posts: [
@@ -391,7 +391,7 @@ export const en = {
     stats: [
       { value: '2,000+', label: 'Partner Clinics' },
       { value: '5,000+', label: 'Healthcare Professionals' },
-      { value: '40+', label: 'Countries Served' },
+      { value: '2', label: 'Countries Served' },
       { value: '94%', label: 'Client Satisfaction' },
     ],
     partnerTitle: 'Partner Organizations',
@@ -399,7 +399,7 @@ export const en = {
     globalBadge: 'Global Presence',
     globalTitle1: 'Serving Clinics',
     globalTitle2: 'Worldwide',
-    globalSub: 'RehabX operates in 40+ countries, providing cutting-edge rehabilitation technology to healthcare facilities across the globe.',
+    globalSub: 'RehabX operates in 2 countries, providing cutting-edge rehabilitation technology to healthcare facilities.',
     globalMapAlt: 'RehabX global clinic locations map',
     becomePartnerTitle1: 'Become a',
     becomePartnerTitle2: 'Partner Clinic',
@@ -551,5 +551,173 @@ export const en = {
     title: '404',
     message: 'Oops! Page not found',
     returnHome: 'Return to Home',
+  },
+
+  // ─── About Page ────────────────────────────────────────────
+  aboutPage: {
+    heroBadge: 'About RehabX',
+    heroTitle1: 'Rehabilitation,',
+    heroTitleHighlight: 'Reinvented.',
+    heroP1: 'RehabX is a clinical-grade rehabilitation platform built on virtual reality and artificial intelligence. Born from a passion for making healthcare more human, more engaging, and more effective — we combine immersive VR therapeutic environments with evidence-based protocols to transform how patients recover from injury, surgery, and neurological conditions.',
+    heroP2: 'Developed by',
+    heroP2b: ', a Tunisian gaming and healthtech studio, RehabX is the product of clinical research partnerships, cutting-edge game development, and a deep commitment to measurable patient outcomes. We believe that rehabilitation should feel like an experience. Today, RehabX is used by clinicians across 2 countries, delivering better recovery outcomes at scale.',
+    teamBadge: 'Team',
+    countriesBadge: 'Countries',
+    achievementsBadge: 'Our Achievements',
+    achievementsTitle1: 'Numbers that speak',
+    achievementsTitle2: 'for themselves',
+    achievementsSub: 'Every milestone represents real patients recovering faster, real clinicians working smarter, and real outcomes that matter.',
+    achievements: [
+      { value: '5,000+', label: 'Clinicians Using RehabX' },
+      { value: '50K+',   label: 'Patients Treated Worldwide' },
+      { value: '2',      label: 'Countries Served' },
+      { value: '94%',    label: 'Client Satisfaction Rate' },
+      { value: '200+',   label: 'Therapeutic VR Environments' },
+      { value: '4.8/5',  label: 'Average App Rating' },
+    ],
+    studioBadge: 'Inherited Games Studio',
+    studioTitle1: 'A studio built on',
+    studioTitle2: 'passion & purpose.',
+    studioP1: 'Inherited Games Studio is a Tunisian game development and healthtech company founded with a bold vision: to use the power of interactive entertainment to improve human lives. From our headquarters in Sousse, Tunisia, our team of engineers, clinicians, designers, and data scientists builds products that sit at the intersection of immersive technology and clinical excellence.',
+    studioP2: "RehabX is our flagship product — a testament to what happens when game development craft meets evidence-based medicine. We are a team of passionate builders, united by the belief that technology should serve humanity's most important challenges.",
+    visitStudio: 'Visit Inherited Games Studio',
+    studioCards: [
+      { label: 'Founded',   value: '2024', sub: 'Sousse, Tunisia' },
+      { label: 'Team Size', value: '6+',   sub: 'Passionate builders' },
+      { label: 'Focus',     value: 'VR + AI', sub: 'Healthcare tech' },
+      { label: 'Mission',   value: 'Impact', sub: 'Real patient outcomes' },
+    ],
+    timelineBadge: 'Our Journey',
+    timelineTitle1: 'From idea to',
+    timelineTitle2: 'global impact',
+    milestones: [
+      { year: '2024', title: 'Studio Founded',     desc: 'Inherited Games Studio was founded in Tunisia with a bold mission to bring gaming innovation to healthcare and rehabilitation.' },
+      { year: '2025', title: 'RehabX Born',         desc: 'RehabX concept emerges from clinical research partnerships — combining VR immersion with evidence-based physiotherapy protocols.' },
+      { year: '2025', title: 'First Clinics',       desc: 'First partner clinics onboarded across Tunisia and France, validating the platform with real patient outcomes.' },
+      { year: '2025', title: 'International Scale', desc: 'Expanding to multiple countries, onboarding partner clinics across Tunisia and France with growing international presence.' },
+      { year: '2026', title: 'AI Engine Launch',    desc: 'Launched the RehabX AI Engine — adaptive protocol generation with 91% milestone accuracy and 94% adherence rate.' },
+      { year: '2026', title: 'Mobile App Release',  desc: 'The RehabX Mobile App launched with 50,000+ downloads, bringing rehabilitation to patients everywhere.' },
+    ],
+    teamBadgeSection: 'Meet the Team',
+    teamTitle1: 'The people behind',
+    teamTitle2: 'RehabX',
+    teamSub: 'A group of passionate engineers, scientists, and creatives from Inherited Games Studio — united by the mission to reinvent rehabilitation.',
+    team: [
+      { name: 'Selsebil Touati',            role: 'Co-Founder & CEO',             bio: 'Visionary leader driving RehabX mission to make rehabilitation accessible and engaging through immersive technology.' },
+      { name: 'Rania Mani',                 role: 'Co-Founder & Data Scientist',  bio: 'Pioneering the AI and data science backbone of RehabX, turning clinical data into actionable rehabilitation insights.' },
+      { name: 'Mohamed Firas Ben Mansour',  role: 'COO',                          bio: 'Orchestrating operations and partnerships that scale RehabX solutions to clinics and hospitals worldwide.' },
+      { name: 'Asma Saidana',               role: 'Game Developer',               bio: 'Building the immersive VR therapeutic environments that make rehabilitation engaging and measurable for patients.' },
+      { name: 'Nour Ltaief',                role: 'Game Developer',               bio: "Crafting interactive game mechanics and adaptive difficulty systems tailored to each patient's rehabilitation needs." },
+      { name: 'Majed Fgaier',               role: '3D Artist',                    bio: 'Designing the stunning 3D therapeutic environments and clinical visualizations that define the RehabX visual experience.' },
+    ],
+    ctaBadge: 'Get Started',
+    ctaTitle1: 'Ready to join',
+    ctaTitle2: 'our mission?',
+    ctaSub: 'Schedule a personalized demo and see how RehabX can transform rehabilitation outcomes in your clinic.',
+    ctaSchedule: 'Schedule a Demo',
+    ctaVisit: 'Visit Inherited Games',
+  },
+
+  // ─── Documentation Page ────────────────────────────────────
+  docsPage: {
+    backToHome: 'Back to Home',
+    badge: 'Documentation',
+    title1: 'RehabX',
+    title2: 'Developer Docs',
+    subtitle: 'Everything you need to get started, integrate, and build on top of the RehabX platform.',
+    searchPlaceholder: 'Search documentation...',
+    cantFind: "Can't find what you're looking for?",
+    contactSupport: 'Contact our support team',
+    sections: [
+      {
+        title: 'Getting Started',
+        articles: ['Introduction to RehabX', 'Platform Overview & Architecture', 'Creating your first patient session', 'Setting up VR devices', 'Dashboard quick tour'],
+      },
+      {
+        title: 'VR Solutions',
+        articles: ['Connecting VR headsets', 'Launching therapeutic sessions', 'Customizing VR environments', 'Biofeedback integration', 'Offline VR mode guide'],
+      },
+      {
+        title: 'Dashboard',
+        articles: ['Managing patients & personnel', 'Sessions & scheduling', 'Analytics & reporting', 'Organizations & multi-site setup', 'Theme & personalization'],
+      },
+      {
+        title: 'Mobile App',
+        articles: ['Downloading the RehabX app', 'Patient-facing features', 'Exercise library navigation', 'Progress tracking & insights', 'Health device sync (Apple/Google)'],
+      },
+      {
+        title: 'API & Integrations',
+        articles: ['REST API reference', 'EMR/EHR integration (HL7, FHIR)', 'Webhook events', 'Authentication & API keys', 'Rate limits & quotas'],
+      },
+      {
+        title: 'Troubleshooting',
+        articles: ['VR device pairing issues', 'Login & access problems', 'Data sync errors', 'Performance optimization', 'Contacting support'],
+      },
+    ],
+  },
+
+  // ─── Help Center Page ──────────────────────────────────────
+  helpPage: {
+    backToHome: 'Back to Home',
+    badge: 'Help Center',
+    title1: 'How can we',
+    title2: 'help you?',
+    subtitle: 'Find answers to common questions, troubleshoot issues, and get the most out of RehabX.',
+    contactCards: [
+      { title: 'Email Support', sub: 'inheritedstudiogames@rehabx.com', note: 'Reply within 1 business day' },
+      { title: 'Live Chat', sub: 'Available in dashboard', note: 'Mon–Fri, 9am–6pm CET' },
+      { title: 'Phone', sub: '+216 20 123 456', note: 'Mon–Fri, 9am–6pm CET' },
+    ],
+    faqTitle1: 'Frequently Asked',
+    faqTitle2: 'Questions',
+    faqs: [
+      { q: 'How do I get started with RehabX?', a: "Getting started is easy! Request a demo from our team and we'll set up your clinic account, onboard your staff, and configure your first VR device — all within a week." },
+      { q: 'What VR headsets are compatible with RehabX?', a: 'RehabX supports Meta Quest series, Pico devices, and PC-tethered headsets (HTC Vive, Valve Index). We also offer our own standalone portable units for home-based therapy.' },
+      { q: 'Is RehabX HIPAA and GDPR compliant?', a: 'Yes. RehabX is fully HIPAA and GDPR compliant. All patient data is encrypted end-to-end, and we maintain comprehensive audit logs for complete regulatory compliance.' },
+      { q: 'Can I integrate RehabX with my existing EMR/EHR system?', a: 'Absolutely. RehabX supports HL7 FHIR integration standards, enabling seamless data exchange with most major EMR/EHR platforms including Epic, Cerner, and more.' },
+      { q: 'How long does onboarding take?', a: 'Most clinics are fully operational within less than 1 week. Our onboarding team handles device setup, staff training, and data migration.' },
+      { q: 'Does RehabX work offline?', a: 'Yes. VR sessions and exercise protocols can run offline on device. Data automatically syncs to the cloud when internet connectivity is restored.' },
+      { q: 'What support options are available?', a: 'We offer 24/7 technical support via email and chat, a dedicated customer success manager for enterprise clients, and an extensive self-service help center.' },
+      { q: 'Can patients use RehabX at home?', a: 'Yes. The RehabX Mobile App allows patients to access guided exercises, track progress, and stay connected with their care team from anywhere — available on iOS and Android.' },
+    ],
+  },
+
+  // ─── Status Page ───────────────────────────────────────────
+  statusPage: {
+    backToHome: 'Back to Home',
+    allOperational: 'All systems operational',
+    someDegraded: 'Some systems degraded',
+    title2: 'System Status',
+    subtitle: 'Real-time status of all RehabX platform components.',
+    platformComponents: 'Platform Components',
+    incidentHistory: 'Incident History',
+    uptime: 'uptime',
+    statusLabels: { operational: 'Operational', degraded: 'Degraded', outage: 'Outage' },
+    services: [
+      { name: 'RehabX Platform' },
+      { name: 'VR Session Streaming' },
+      { name: 'Mobile App API' },
+      { name: 'Dashboard & Analytics' },
+      { name: 'Data Sync Engine' },
+      { name: 'Authentication (SSO)' },
+      { name: 'EMR/EHR Integration' },
+      { name: 'AI Protocol Engine' },
+    ],
+    incidents: [
+      { date: 'May 10, 2026', title: 'No incidents reported' },
+      { date: 'May 8, 2026',  title: 'Scheduled maintenance — Data Sync Engine (completed)' },
+      { date: 'Apr 30, 2026', title: 'Elevated API response times resolved' },
+    ],
+  },
+
+  // ─── Privacy Page ──────────────────────────────────────────
+  privacyPage: {
+    backToHome: 'Back to Home',
+    badge: 'Privacy Policy',
+    title1: 'Your privacy',
+    title2: 'matters to us.',
+    intro: 'This Privacy Policy explains how Inherited Games Studio ("we", "us", "RehabX") collects, uses, and protects your information when you use the RehabX platform.',
+    lastUpdated: 'Last updated: May 10, 2026 · Effective date: May 10, 2026',
+    badges: ['HIPAA Compliant', 'GDPR Compliant', 'SOC 2 Type II', 'ISO 27001', 'AES-256 Encrypted'],
   },
 };

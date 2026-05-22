@@ -6,7 +6,7 @@ import { useInView } from '@/hooks/useInView';
 import rehabxLogo from '@/assets/rehabx-logo.png';
 import appStoreBadge from '@/assets/app-store-badge.png';
 import googlePlayBadge from '@/assets/google-play-badge.png';
-import rehabxContainer from '@/assets/rehabx-container.png';
+import mobileAppHome from '@/assets/mobile-app-home.png';
 import vrDemoThumb from '@/assets/vr-demo-thumbnail.png';
 import screenVrSession from '@/assets/screen-vr-session.png';
 import screenHome from '@/assets/screen-home.png';
@@ -147,9 +147,9 @@ export function RehabXMobileAppPage() {
               className="relative flex justify-center"
             >
               <motion.img
-                src={rehabxContainer}
+                src={mobileAppHome}
                 alt="RehabX Mobile App Screens"
-                className="w-full max-w-[800px] lg:max-w-[900px] h-auto object-contain drop-shadow-2xl"
+                className="w-full max-w-[420px] lg:max-w-[460px] h-auto object-contain drop-shadow-2xl"
                 animate={{ y: [0, -12, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               />
@@ -162,7 +162,7 @@ export function RehabXMobileAppPage() {
       <section className="py-14 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {t.mobilePage.stats.map((stat, i) => (
+            {t.mobilePage.stats.map((stat, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
@@ -212,11 +212,10 @@ export function RehabXMobileAppPage() {
                   onClick={() => setActiveFeature(i)}
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className={`px-5 py-3 rounded-xl font-semibold text-sm transition-all duration-300 flex items-center gap-2 ${
-                    activeFeature === i
-                      ? 'bg-gradient-to-r from-purple-600 to-blue-500 text-white shadow-lg shadow-purple-200'
-                      : 'bg-white text-gray-600 border border-gray-200 hover:border-purple-200'
-                  }`}
+                  className={`px-5 py-3 rounded-xl font-semibold text-sm transition-all duration-300 flex items-center gap-2 ${activeFeature === i
+                    ? 'bg-gradient-to-r from-purple-600 to-blue-500 text-white shadow-lg shadow-purple-200'
+                    : 'bg-white text-gray-600 border border-gray-200 hover:border-purple-200'
+                    }`}
                 >
                   <TabIcon size={16} />
                   {feature.title}
@@ -240,7 +239,7 @@ export function RehabXMobileAppPage() {
                   const FeatureIcon = translatedFeatures[activeFeature].icon;
                   return (
                     <>
-                      <div className="w-20 h-20 bg-purple-50 border-2 border-purple-200 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                      <div className="w-20 h-20 bg-violet-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
                         <FeatureIcon className="text-purple-600" size={36} strokeWidth={2} />
                       </div>
                       <h3 className="text-2xl font-black text-gray-900 mb-4">{translatedFeatures[activeFeature].title}</h3>
@@ -265,11 +264,10 @@ export function RehabXMobileAppPage() {
                   transition={{ duration: 0.5, delay: i * 0.1 }}
                   whileHover={{ y: -6, transition: { duration: 0.2 } }}
                   onClick={() => setActiveFeature(i)}
-                  className={`bg-white border-2 rounded-2xl p-6 cursor-pointer transition-all hover:shadow-xl ${
-                    activeFeature === i ? 'border-purple-300 shadow-purple-100 shadow-lg' : 'border-gray-100 hover:border-purple-200'
-                  }`}
+                  className={`bg-white border-2 rounded-2xl p-6 cursor-pointer transition-all hover:shadow-xl ${activeFeature === i ? 'border-purple-300 shadow-purple-100 shadow-lg' : 'border-gray-100 hover:border-purple-200'
+                    }`}
                 >
-                  <div className="w-14 h-14 bg-purple-50 border-2 border-purple-200 rounded-xl flex items-center justify-center mb-5">
+                  <div className="w-14 h-14 bg-violet-50 rounded-2xl flex items-center justify-center mb-5">
                     <FeatureIcon className="text-purple-600" size={24} strokeWidth={2} />
                   </div>
                   <h3 className="text-lg font-bold text-gray-900 mb-2">{feature.title}</h3>
@@ -410,7 +408,7 @@ export function RehabXMobileAppPage() {
                     transition={{ duration: 0.4, delay: i * 0.1 }}
                     className="flex items-center gap-3"
                   >
-                    <div className="w-10 h-10 bg-gradient-to-br from-purple-100 to-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <div className="w-10 h-10 bg-violet-50 rounded-2xl flex items-center justify-center flex-shrink-0">
                       <feature.icon className="text-purple-600" size={18} />
                     </div>
                     <span className="text-sm font-medium text-gray-700">{feature.text}</span>

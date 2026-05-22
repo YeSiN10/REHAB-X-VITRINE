@@ -19,7 +19,7 @@ const solutionColors = {
 };
 
 const navLinks = [
-  { label: 'about', section: 'about', external: 'https://inheritedgames.com/about/' },
+  { label: 'about', section: 'about' },
 ];
 
 /* ─── Header component ────────────────────────────────────────────── */
@@ -101,6 +101,13 @@ export function Header() {
     setMobileOpen(false);
     setShowSolutions(false);
     navigate('/clients');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const goToAbout = () => {
+    setMobileOpen(false);
+    setShowSolutions(false);
+    navigate('/about');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -294,14 +301,14 @@ export function Header() {
 
             {/* Regular nav links */}
             {navLinks.map((link) => {
-              const isActive = activeSection === link.section;
+              const isActive = location.pathname === '/about';
               return (
                 <button
                   key={link.label}
-                  onClick={() => scrollTo(link.section, link.external)}
+                  onClick={goToAbout}
                   className={`relative px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-200 ${
                     isActive
-                      ? 'text-purple-600'
+                      ? 'text-purple-600 bg-purple-50'
                       : 'text-gray-600 hover:text-purple-600 hover:bg-purple-50'
                   }`}
                 >
@@ -411,7 +418,7 @@ export function Header() {
               {navLinks.map((link) => (
                 <button
                   key={link.label}
-                  onClick={() => scrollTo(link.section, link.external)}
+                  onClick={goToAbout}
                   className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-purple-50 hover:text-purple-600 rounded-xl transition-all font-semibold"
                 >
                   {t.nav.about}
