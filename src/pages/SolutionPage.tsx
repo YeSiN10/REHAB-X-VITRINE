@@ -14,6 +14,7 @@ import dashboardMainFeature from '@/assets/dashboard-main-feature.png';
 import dashboardTheme from '@/assets/dashboard-theme.png';
 import dashboardAiAssistant from '@/assets/dashboard-ai-assistant.png';
 import dashboardDownload from '@/assets/dashboard-download.png';
+import dashboardDemo from '@/assets/DashboardDemo.mp4';
 import { useLanguage } from '@/i18n/LanguageContext';
 
 /* ─── Solution data ──────────────────────────────────────────────────── */
@@ -167,6 +168,7 @@ const solutions = {
 /* ─── Component ──────────────────────────────────────────────────────── */
 export function SolutionPage() {
   const [showVideo, setShowVideo] = useState(false);
+  const [showDashboardVideo, setShowDashboardVideo] = useState(false);
   const { solutionId } = useParams<{ solutionId: string }>();
   const navigate = useSafeNavigate();
   const { t } = useLanguage();
@@ -221,7 +223,7 @@ export function SolutionPage() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.4 }}
-            onClick={() => navigate(-1)}
+            onClick={() => navigate('/')}
             className="flex items-center gap-2 text-gray-500 hover:text-purple-600 transition-colors mb-10 text-sm font-semibold group"
           >
             <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
@@ -535,6 +537,7 @@ export function SolutionPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            onClick={() => sol.id === 'tracking' ? setShowDashboardVideo(true) : setShowVideo(true)}
             className={`relative bg-gradient-to-br ${sol.color} rounded-3xl overflow-hidden h-72 flex items-center justify-center cursor-pointer group`}
           >
             <img
@@ -596,7 +599,7 @@ onClick={() => navigate('/demo')}
       </section>
     </div>
 
-      {/* ── YouTube Video Popup ─────────────────────────────────────── */}
+      {/* ── VR Video Popup ─────────────────────────────────────────── */}
       <AnimatePresence>
         {showVideo && (
           <motion.div
@@ -624,6 +627,43 @@ onClick={() => navigate('/demo')}
               />
               <button
                 onClick={() => setShowVideo(false)}
+                className="absolute top-3 right-3 w-10 h-10 bg-black/60 hover:bg-black/80 rounded-full flex items-center justify-center text-white transition-colors"
+              >
+                <X size={20} />
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ── Dashboard Video Popup ──────────────────────────────────── */}
+      <AnimatePresence>
+        {showDashboardVideo && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+            onClick={() => setShowDashboardVideo(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.85, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="relative w-full max-w-4xl aspect-video rounded-2xl overflow-hidden border-2 border-violet-400/50 shadow-[0_0_60px_rgba(139,92,246,0.4)]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <video
+                src={dashboardDemo}
+                title="RehabX Dashboard Demo"
+                controls
+                autoPlay
+                playsInline
+                className="w-full h-full bg-black"
+              />
+              <button
+                onClick={() => setShowDashboardVideo(false)}
                 className="absolute top-3 right-3 w-10 h-10 bg-black/60 hover:bg-black/80 rounded-full flex items-center justify-center text-white transition-colors"
               >
                 <X size={20} />

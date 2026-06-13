@@ -12,6 +12,7 @@ import { TestimonialsPage } from "./pages/TestimonialsPage";
 import { ClientsPage } from "./pages/ClientsPage";
 import { DemoRequestPage } from "./pages/DemoRequestPage";
 import { RehabXMobileAppPage } from "./pages/RehabXMobileAppPage";
+import { DashboardDemoPage } from "./pages/DashboardDemoPage";
 import { AboutPage } from "./pages/AboutPage";
 import { DocumentationPage } from "./pages/DocumentationPage";
 import { HelpCenterPage } from "./pages/HelpCenterPage";
@@ -44,8 +45,9 @@ const App = () => (
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
-              <Route path="/solutions/:solutionId" element={<SolutionPage />} />
               <Route path="/solutions/mobile" element={<RehabXMobileAppPage />} />
+              <Route path="/solutions/dashboard" element={<DashboardDemoPage />} />
+              <Route path="/solutions/:solutionId" element={<SolutionPage />} />
               <Route path="/indications" element={<IndicationsPage />} />
               <Route path="/testimonials" element={<TestimonialsPage />} />
               <Route path="/clients" element={<ClientsPage />} />

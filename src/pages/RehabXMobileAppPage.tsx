@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Download, Smartphone, Play, Star, CheckCircle2, X, Gauge, ShieldCheck, Wifi, Activity, CalendarCheck, Headset } from 'lucide-react';
 import { useSafeNavigate } from '@/hooks/useSafeNav';
 import { useInView } from '@/hooks/useInView';
-import rehabxLogo from '@/assets/rehabx-logo.png';
 import appStoreBadge from '@/assets/app-store-badge.png';
 import googlePlayBadge from '@/assets/google-play-badge.png';
 import mobileAppHome from '@/assets/mobile-app-home.png';
@@ -11,6 +10,7 @@ import vrDemoThumb from '@/assets/vr-demo-thumbnail.png';
 import screenVrSession from '@/assets/screen-vr-session.png';
 import screenHome from '@/assets/screen-home.png';
 import screenCalendar from '@/assets/screen-calendar.png';
+import mobileDemo from '@/assets/MobileDemo.mp4';
 import { useLanguage } from '@/i18n/LanguageContext';
 
 const features = [
@@ -511,14 +511,13 @@ export function RehabXMobileAppPage() {
               >
                 <X size={20} />
               </button>
-              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-purple-900 to-blue-900">
-                <div className="text-center">
-                  <div className="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Play size={36} className="text-white ml-1" fill="white" />
-                  </div>
-                  <p className="text-white/60 text-sm">{t.mobilePage.videoComingSoon}</p>
-                </div>
-              </div>
+              <video
+                src={mobileDemo}
+                controls
+                autoPlay
+                playsInline
+                className="w-full h-full bg-black object-contain"
+              />
             </motion.div>
           </motion.div>
         )}
